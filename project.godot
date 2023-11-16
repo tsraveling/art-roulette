@@ -14,3 +14,7 @@ config/name="Art Roulette"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+FileBrowser="*res://autoload/FileBrowser.gd"
