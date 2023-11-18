@@ -27,6 +27,8 @@ alignment = 2
 
 [node name="CurrentPathLabel" type="Label" parent="VerticalLayout/ToolBar"]
 layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 2
 
 [node name="ImageCountLabel" type="Label" parent="VerticalLayout/ToolBar"]
 layout_mode = 2
