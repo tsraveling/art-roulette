@@ -22,12 +22,16 @@ grow_vertical = 2
 color = Color(0.109804, 0.109804, 0.109804, 1)
 
 [node name="VerticalLayout" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 79.0
-offset_right = -88.0
+offset_left = -300.0
+offset_top = 54.0
+offset_right = 300.0
+offset_bottom = -57.0
 grow_horizontal = 2
 grow_vertical = 2
 

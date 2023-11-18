@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://brfyn2p2tmcjs"]
+[gd_scene load_steps=2 format=3 uid="uid://brfyn2p2tmcjs"]
 
 [ext_resource type="Script" path="res://scenes/roulette/RouletteScene.gd" id="1_xx47x"]
-[ext_resource type="Texture2D" uid="uid://dpket32i1n8jk" path="res://assets/art/test.jpg" id="2_vui01"]
 
 [node name="RouletteScene" type="Control"]
 layout_mode = 3
@@ -20,33 +19,44 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ToolBar" type="HBoxContainer" parent="VerticalLayout"]
+[node name="MarginContainer" type="MarginContainer" parent="VerticalLayout"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 4
+
+[node name="ToolBar" type="HBoxContainer" parent="VerticalLayout/MarginContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 alignment = 2
 
-[node name="CurrentPathLabel" type="Label" parent="VerticalLayout/ToolBar"]
+[node name="CurrentPathLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar"]
 layout_mode = 2
 size_flags_horizontal = 3
 text_overrun_behavior = 2
 
-[node name="ImageCountLabel" type="Label" parent="VerticalLayout/ToolBar"]
+[node name="ImageCountLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar"]
 layout_mode = 2
 
-[node name="NextButton" type="Button" parent="VerticalLayout/ToolBar"]
+[node name="FocusButton" type="CheckButton" parent="VerticalLayout/MarginContainer/ToolBar"]
+layout_mode = 2
+text = "Focus"
+
+[node name="NextButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar"]
 layout_mode = 2
 text = "Next Image"
 
-[node name="DoneButton" type="Button" parent="VerticalLayout/ToolBar"]
+[node name="DoneButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar"]
 layout_mode = 2
 text = "Done	"
 
 [node name="ImageRect" type="TextureRect" parent="VerticalLayout"]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("2_vui01")
 expand_mode = 1
 stretch_mode = 5
 
-[connection signal="pressed" from="VerticalLayout/ToolBar/NextButton" to="." method="_on_next_button_pressed"]
-[connection signal="pressed" from="VerticalLayout/ToolBar/DoneButton" to="." method="_on_done_button_pressed"]
+[connection signal="toggled" from="VerticalLayout/MarginContainer/ToolBar/FocusButton" to="." method="_on_focus_button_toggled"]
+[connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/DoneButton" to="." method="_on_done_button_pressed"]

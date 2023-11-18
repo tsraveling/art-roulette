@@ -3,6 +3,9 @@ extends Node
 var root_directory: String = "Pick a folder"
 var folders: Array[Folder] = []
 var image_paths: Array[String] = []
+var image_paths_skipped: Array[String] = []
+var image_paths_done: Array[String] = []
+var total_images_loaded: int = 0
 var initialized := false
 
 func save_root():
@@ -43,10 +46,34 @@ func load_root_dir():
 
 func load_active_images():
 	image_paths.clear()
+	image_paths_skipped.clear()
+	image_paths_done.clear()
 	for folder in folders:
 		if folder.included:
 			image_paths.append_array(folder.image_paths)
-	print("Loaded %d images" % image_paths.size())
+	total_images_loaded = image_paths.size()
+	print("Loaded %d images" % total_images_loaded)
+	
+func pop_next(did_finish: bool = true) -> String:
+	
+	# Ensure the array is not empty to avoid errors
+	if image_paths.size() == 0:
+		return ""  # or handle the empty array case as needed
+
+	var image_index = randi() % image_paths.size()
+	var selected_image = image_paths[image_index]
+
+	# Remove the selected item from the array
+	image_paths.remove_at(image_index)
+	
+	# Add the image to the correct array
+	if did_finish:
+		image_paths_done.append(selected_image)
+	else:
+		image_paths_skipped.append(selected_image)
+
+	return selected_image
+
 
 func _ready():
 	var config = ConfigFile.new()
