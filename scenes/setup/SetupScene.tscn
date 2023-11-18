@@ -1,9 +1,75 @@
-[gd_scene format=3 uid="uid://brfyn2p2tmcjs"]
+[gd_scene load_steps=3 format=3 uid="uid://cssae6c3v2twh"]
 
-[node name="Control" type="Control"]
+[ext_resource type="Script" path="res://scenes/setup/SetupScene.gd" id="1_igmc0"]
+[ext_resource type="PackedScene" uid="uid://ct7i5tbswuu20" path="res://scenes/setup/folder_item.tscn" id="2_6l3o5"]
+
+[node name="SetupScene" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_igmc0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.109804, 0.109804, 0.109804, 1)
+
+[node name="VerticalLayout" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 79.0
+offset_right = -88.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RootDirSelector" type="HBoxContainer" parent="VerticalLayout"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="VerticalLayout/RootDirSelector"]
+layout_mode = 2
+text = "Root directory"
+
+[node name="RootDirectoryButton" type="Button" parent="VerticalLayout/RootDirSelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "/documents"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VerticalLayout"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VerticalLayout/ScrollContainer"]
+layout_mode = 2
+
+[node name="FolderList" type="VBoxContainer" parent="VerticalLayout/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FolderItem" parent="VerticalLayout/ScrollContainer/VBoxContainer/FolderList" instance=ExtResource("2_6l3o5")]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="VerticalLayout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Start Roulette"
+
+[node name="RootDirectoryPicker" type="FileDialog" parent="."]
+title = "Open a Directory"
+ok_button_text = "Select Current Folder"
+file_mode = 2
+access = 2
+
+[connection signal="pressed" from="VerticalLayout/RootDirSelector/RootDirectoryButton" to="." method="_on_root_directory_button_pressed"]
+[connection signal="pressed" from="VerticalLayout/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="dir_selected" from="RootDirectoryPicker" to="." method="_on_root_directory_picker_dir_selected"]

@@ -2,6 +2,8 @@ extends Node
 
 var root_directory: String = "Pick a folder"
 var folders: Array[Folder] = []
+var image_paths: Array[String] = []
+var initialized := false
 
 func save_root():
 	var config = ConfigFile.new()
@@ -13,28 +15,38 @@ func set_new_root(dir):
 	print(">>> set root: %s" % dir)
 	root_directory = dir
 	save_root()
-	load(root_directory)
+	load_root_dir()
 
-
-func load(dir):
-		
-	# Remove the old folders out of here
-	folders.clear()
-	
-	print(">>> loading %s" % dir)
-	# Recurse through the newly selected dir and get paths for each
-	var root_dir = DirAccess.open(root_directory)
-	if root_dir:
-		root_dir.list_dir_begin()
-		var file_name = root_dir.get_next()
+func process_dir(dir) -> Array[Folder]:
+	print("Processing directory: %s" % dir)
+	var ret: Array[Folder] = [Folder.new(dir)]
+	var base_dir = DirAccess.open(dir)
+	if base_dir:
+		base_dir.list_dir_begin()
+		var file_name = base_dir.get_next()
 		while file_name != "":
-			if root_dir.current_is_dir():
+			if base_dir.current_is_dir():
 				print("Found directory: " + file_name)
+				ret.append_array(process_dir("%s/%s" % [dir, file_name]))
 			else:
 				print("Found file: " + file_name)
-			file_name = root_dir.get_next()
+			file_name = base_dir.get_next()
 	else:
-		print("Error occurred while trying to access path: %s" % root_dir)
+		print("Error occurred while trying to access path: %s" % base_dir)
+	return ret
+
+func load_root_dir():
+	# Remove the old folders out of here
+	folders.clear()
+	initialized = true
+	folders = process_dir(root_directory)
+
+func load_active_images():
+	image_paths.clear()
+	for folder in folders:
+		if folder.included:
+			image_paths.append_array(folder.image_paths)
+	print("Loaded %d images" % image_paths.size())
 
 func _ready():
 	var config = ConfigFile.new()
@@ -52,4 +64,4 @@ func _ready():
 	if saved_root != null:
 		root_directory = saved_root
 		print("Loaded root: %s", saved_root)
-		load(saved_root)
+		load_root_dir()

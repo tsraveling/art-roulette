@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cssae6c3v2twh"]
+[gd_scene load_steps=3 format=3 uid="uid://brfyn2p2tmcjs"]
 
 [ext_resource type="Script" path="res://scenes/roulette/RouletteScene.gd" id="1_xx47x"]
-[ext_resource type="Script" path="res://scenes/roulette/FolderScroller.gd" id="2_ucxec"]
+[ext_resource type="Texture2D" uid="uid://dpket32i1n8jk" path="res://assets/art/test.jpg" id="2_vui01"]
 
 [node name="RouletteScene" type="Control"]
 layout_mode = 3
@@ -12,53 +12,39 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xx47x")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="VerticalLayout" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.109804, 0.109804, 0.109804, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_right = 250.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ToolBar" type="HBoxContainer" parent="VerticalLayout"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-theme_override_constants/separation = 20
+alignment = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="CurrentPathLabel" type="Label" parent="VerticalLayout/ToolBar"]
 layout_mode = 2
-text = "Root directory"
 
-[node name="RootDirectoryButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="ImageCountLabel" type="Label" parent="VerticalLayout/ToolBar"]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "/documents"
 
-[node name="FolderScroller" type="ScrollContainer" parent="VBoxContainer"]
+[node name="NextButton" type="Button" parent="VerticalLayout/ToolBar"]
+layout_mode = 2
+text = "Next Image"
+
+[node name="DoneButton" type="Button" parent="VerticalLayout/ToolBar"]
+layout_mode = 2
+text = "Done	"
+
+[node name="ImageRect" type="TextureRect" parent="VerticalLayout"]
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("2_ucxec")
+texture = ExtResource("2_vui01")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/FolderScroller"]
-layout_mode = 2
-
-[node name="RootDirectoryPicker" type="FileDialog" parent="."]
-title = "Open a Directory"
-ok_button_text = "Select Current Folder"
-file_mode = 2
-access = 2
-
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/RootDirectoryButton" to="." method="_on_root_directory_button_pressed"]
-[connection signal="dir_selected" from="RootDirectoryPicker" to="." method="_on_root_directory_picker_dir_selected"]
+[connection signal="pressed" from="VerticalLayout/ToolBar/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="VerticalLayout/ToolBar/DoneButton" to="." method="_on_done_button_pressed"]
