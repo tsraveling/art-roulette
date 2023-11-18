@@ -41,7 +41,13 @@ layout_mode = 2
 
 [node name="FocusButton" type="CheckButton" parent="VerticalLayout/MarginContainer/ToolBar"]
 layout_mode = 2
+focus_mode = 0
 text = "Focus"
+
+[node name="TimerLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "~"
 
 [node name="NextButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar"]
 layout_mode = 2
@@ -57,6 +63,9 @@ size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Timer" type="Timer" parent="."]
+
 [connection signal="toggled" from="VerticalLayout/MarginContainer/ToolBar/FocusButton" to="." method="_on_focus_button_toggled"]
 [connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/DoneButton" to="." method="_on_done_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

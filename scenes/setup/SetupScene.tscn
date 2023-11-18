@@ -63,6 +63,32 @@ size_flags_vertical = 3
 [node name="FolderItem" parent="VerticalLayout/ScrollContainer/VBoxContainer/FolderList" instance=ExtResource("2_6l3o5")]
 layout_mode = 2
 
+[node name="OptionButton" type="OptionButton" parent="VerticalLayout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+item_count = 10
+selected = 2
+popup/item_0/text = "30s"
+popup/item_0/id = 0
+popup/item_1/text = "1m"
+popup/item_1/id = 1
+popup/item_2/text = "2m"
+popup/item_2/id = 2
+popup/item_3/text = "5m"
+popup/item_3/id = 3
+popup/item_4/text = "10m"
+popup/item_4/id = 4
+popup/item_5/text = "15m"
+popup/item_5/id = 5
+popup/item_6/text = "20m"
+popup/item_6/id = 6
+popup/item_7/text = "30m"
+popup/item_7/id = 7
+popup/item_8/text = "1h"
+popup/item_8/id = 8
+popup/item_9/text = "Unlimited"
+popup/item_9/id = 9
+
 [node name="StartButton" type="Button" parent="VerticalLayout"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
@@ -75,5 +101,6 @@ file_mode = 2
 access = 2
 
 [connection signal="pressed" from="VerticalLayout/RootDirSelector/RootDirectoryButton" to="." method="_on_root_directory_button_pressed"]
+[connection signal="item_selected" from="VerticalLayout/OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="pressed" from="VerticalLayout/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="dir_selected" from="RootDirectoryPicker" to="." method="_on_root_directory_picker_dir_selected"]
