@@ -31,8 +31,6 @@ func process_dir(dir) -> Array[Folder]:
 			if base_dir.current_is_dir():
 				print("Found directory: " + file_name)
 				ret.append_array(process_dir("%s/%s" % [dir, file_name]))
-			else:
-				print("Found file: " + file_name)
 			file_name = base_dir.get_next()
 	else:
 		print("Error occurred while trying to access path: %s" % base_dir)

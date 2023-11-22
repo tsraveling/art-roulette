@@ -21,7 +21,8 @@ func get_images() -> Array[String]:
 		base_dir.list_dir_begin()
 		var file_name = base_dir.get_next()
 		while file_name != "":
-			if !base_dir.current_is_dir() && (file_name.ends_with(".png") || file_name.ends_with(".jpg") || file_name.ends_with(".jpeg")):
+			var ext_check = file_name.to_lower()
+			if !base_dir.current_is_dir() && (ext_check.ends_with(".png") || ext_check.ends_with(".jpg") || ext_check.ends_with(".jpeg")):
 				ret.append("%s/%s" % [path, file_name])
 			file_name = base_dir.get_next()
 	else:
