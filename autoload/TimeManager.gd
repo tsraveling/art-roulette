@@ -11,7 +11,29 @@ const THIRTY_MIN = 7
 const ONE_HOUR = 8
 const UNLIMITED = 9
 
+const SESSION_TEN_MIN = 0
+const SESSION_TWENTY_MIN = 1
+const SESSION_THIRTY_MIN = 2
+const SESSION_FORTY_FIVE = 3
+const SESSION_ONE_HOUR = 4
+const SESSION_UNLIMITED = 5
+
 var selected_duration: int
+var selected_session_duration: int
+
+func session_in_seconds(session: int) -> float:
+	match session:
+		SESSION_TEN_MIN:
+			return 10 * 60
+		SESSION_TWENTY_MIN:
+			return 20 * 60
+		SESSION_THIRTY_MIN:
+			return 30 * 60
+		SESSION_FORTY_FIVE:
+			return 45 * 60
+		SESSION_ONE_HOUR:
+			return 60 * 60
+	return -1
 
 func time_in_seconds(amt: int) -> float:
 	match amt:

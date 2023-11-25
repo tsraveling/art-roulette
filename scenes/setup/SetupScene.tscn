@@ -63,8 +63,18 @@ size_flags_vertical = 3
 [node name="FolderItem" parent="VerticalLayout/ScrollContainer/VBoxContainer/FolderList" instance=ExtResource("2_6l3o5")]
 layout_mode = 2
 
-[node name="OptionButton" type="OptionButton" parent="VerticalLayout"]
+[node name="IntervalHBox" type="HBoxContainer" parent="VerticalLayout"]
 layout_mode = 2
+
+[node name="Label" type="Label" parent="VerticalLayout/IntervalHBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Time per sketch:"
+
+[node name="OptionButton" type="OptionButton" parent="VerticalLayout/IntervalHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 item_count = 10
 selected = 2
@@ -89,6 +99,34 @@ popup/item_8/id = 8
 popup/item_9/text = "Unlimited"
 popup/item_9/id = 9
 
+[node name="SessionHBox" type="HBoxContainer" parent="VerticalLayout"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VerticalLayout/SessionHBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Session Duration"
+
+[node name="SessionDurationButton" type="OptionButton" parent="VerticalLayout/SessionHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+item_count = 6
+selected = 2
+popup/item_0/text = "10m"
+popup/item_0/id = 0
+popup/item_1/text = "20m"
+popup/item_1/id = 1
+popup/item_2/text = "30m"
+popup/item_2/id = 2
+popup/item_3/text = "45m"
+popup/item_3/id = 3
+popup/item_4/text = "1h"
+popup/item_4/id = 4
+popup/item_5/text = "Untimed"
+popup/item_5/id = 5
+
 [node name="StartButton" type="Button" parent="VerticalLayout"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
@@ -101,6 +139,7 @@ file_mode = 2
 access = 2
 
 [connection signal="pressed" from="VerticalLayout/RootDirSelector/RootDirectoryButton" to="." method="_on_root_directory_button_pressed"]
-[connection signal="item_selected" from="VerticalLayout/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="VerticalLayout/IntervalHBox/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="VerticalLayout/SessionHBox/SessionDurationButton" to="." method="_on_session_duration_button_item_selected"]
 [connection signal="pressed" from="VerticalLayout/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="dir_selected" from="RootDirectoryPicker" to="." method="_on_root_directory_picker_dir_selected"]

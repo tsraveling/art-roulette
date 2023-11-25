@@ -53,9 +53,22 @@ text = "~"
 layout_mode = 2
 text = "Next Image"
 
+[node name="AddTimeButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar"]
+layout_mode = 2
+text = "Add Time"
+
+[node name="PausePlayButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar"]
+layout_mode = 2
+text = "Pause"
+
 [node name="DoneButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar"]
 layout_mode = 2
 text = "Done	"
+
+[node name="SessionTimerLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "~"
 
 [node name="ImageRect" type="TextureRect" parent="VerticalLayout"]
 layout_mode = 2
@@ -65,7 +78,30 @@ stretch_mode = 5
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="MoreTimeMenu" type="PopupMenu" parent="."]
+item_count = 5
+item_0/text = "1m"
+item_0/id = 0
+item_1/text = "2m"
+item_1/id = 1
+item_2/text = "5m"
+item_2/id = 2
+item_3/text = "10m"
+item_3/id = 3
+item_4/text = "20m"
+item_4/id = 4
+
+[node name="SessionTimer" type="Timer" parent="."]
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = "Session Complete"
+ok_button_text = "I'm Finished"
+cancel_button_text = "Continue Drawing"
+
 [connection signal="toggled" from="VerticalLayout/MarginContainer/ToolBar/FocusButton" to="." method="_on_focus_button_toggled"]
 [connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/AddTimeButton" to="." method="_on_add_time_button_pressed"]
+[connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/PausePlayButton" to="." method="_on_pause_play_button_pressed"]
 [connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/DoneButton" to="." method="_on_done_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="index_pressed" from="MoreTimeMenu" to="." method="_on_more_time_menu_index_pressed"]

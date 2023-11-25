@@ -3,7 +3,8 @@ extends Control
 @onready var root_dir_picker := $RootDirectoryPicker
 @onready var root_dir_button := $VerticalLayout/RootDirSelector/RootDirectoryButton
 @onready var folder_list := $VerticalLayout/ScrollContainer/VBoxContainer/FolderList
-@onready var duration_select := $VerticalLayout/OptionButton
+@onready var duration_select := $VerticalLayout/IntervalHBox/OptionButton
+@onready var session_select := $VerticalLayout/SessionHBox/SessionDurationButton
 
 var folder_item = preload("res://scenes/setup/folder_item.tscn")
 
@@ -11,6 +12,7 @@ var folder_item = preload("res://scenes/setup/folder_item.tscn")
 func _ready():
 	root_dir_button.text = FileBrowser.root_directory
 	duration_select.selected = TimeManager.selected_duration
+	session_select.selected = TimeManager.selected_session_duration
 	refresh_list()
 
 func _on_root_directory_button_pressed():
@@ -44,3 +46,7 @@ func _on_start_button_pressed():
 
 func _on_option_button_item_selected(index):
 	TimeManager.selected_duration = index
+
+
+func _on_session_duration_button_item_selected(index):
+	TimeManager.selected_session_duration = index
