@@ -7,18 +7,8 @@ var image_paths_skipped: Array[String] = []
 var image_paths_done: Array[String] = []
 var total_images_loaded: int = 0
 var initialized := false
+var is_root_initialized := false
 
-func save_root():
-	var config = ConfigFile.new()
-	print(">>> saving ....")
-	config.set_value("root", "root_directory", root_directory)
-	config.save("user://settings.cfg")
-
-func set_new_root(dir):
-	print(">>> set root: %s" % dir)
-	root_directory = dir
-	save_root()
-	load_root_dir()
 
 func process_dir(dir) -> Array[Folder]:
 	print("Processing directory: %s" % dir)
@@ -34,13 +24,8 @@ func process_dir(dir) -> Array[Folder]:
 			file_name = base_dir.get_next()
 	else:
 		print("Error occurred while trying to access path: %s" % base_dir)
+	
 	return ret
-
-func load_root_dir():
-	# Remove the old folders out of here
-	folders.clear()
-	initialized = true
-	folders = process_dir(root_directory)
 
 func load_active_images():
 	image_paths.clear()
@@ -51,7 +36,8 @@ func load_active_images():
 			image_paths.append_array(folder.image_paths)
 	total_images_loaded = image_paths.size()
 	print("Loaded %d images" % total_images_loaded)
-	
+
+# STUB: Move this into library -- maybe even a "Session" autoload
 func pop_next(did_finish: bool = true) -> String:
 	
 	# Ensure the array is not empty to avoid errors
@@ -72,7 +58,6 @@ func pop_next(did_finish: bool = true) -> String:
 
 	return selected_image
 
-
 func _ready():
 	var config = ConfigFile.new()
 	
@@ -88,5 +73,6 @@ func _ready():
 	var saved_root = config.get_value("root", "root_directory")
 	if saved_root != null:
 		root_directory = saved_root
+		is_root_initialized = true
 		print("Loaded root: %s", saved_root)
-		load_root_dir()
+		# load_root_dir()

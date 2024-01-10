@@ -1,0 +1,145 @@
+[gd_scene load_steps=3 format=3 uid="uid://cssae6c3v2twh"]
+
+[ext_resource type="Script" path="res://scenes/setup/SetupScene.gd" id="1_igmc0"]
+[ext_resource type="PackedScene" uid="uid://ct7i5tbswuu20" path="res://scenes/setup/folder_item.tscn" id="2_6l3o5"]
+
+[node name="SetupScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_igmc0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.109804, 0.109804, 0.109804, 1)
+
+[node name="VerticalLayout" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = 54.0
+offset_right = 300.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RootDirSelector" type="HBoxContainer" parent="VerticalLayout"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="VerticalLayout/RootDirSelector"]
+layout_mode = 2
+text = "Root directory"
+
+[node name="RootDirectoryButton" type="Button" parent="VerticalLayout/RootDirSelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "/documents"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VerticalLayout"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VerticalLayout/ScrollContainer"]
+layout_mode = 2
+
+[node name="FolderList" type="VBoxContainer" parent="VerticalLayout/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FolderItem" parent="VerticalLayout/ScrollContainer/VBoxContainer/FolderList" instance=ExtResource("2_6l3o5")]
+layout_mode = 2
+
+[node name="IntervalHBox" type="HBoxContainer" parent="VerticalLayout"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VerticalLayout/IntervalHBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Time per sketch:"
+
+[node name="OptionButton" type="OptionButton" parent="VerticalLayout/IntervalHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+item_count = 10
+selected = 2
+popup/item_0/text = "30s"
+popup/item_0/id = 0
+popup/item_1/text = "1m"
+popup/item_1/id = 1
+popup/item_2/text = "2m"
+popup/item_2/id = 2
+popup/item_3/text = "5m"
+popup/item_3/id = 3
+popup/item_4/text = "10m"
+popup/item_4/id = 4
+popup/item_5/text = "15m"
+popup/item_5/id = 5
+popup/item_6/text = "20m"
+popup/item_6/id = 6
+popup/item_7/text = "30m"
+popup/item_7/id = 7
+popup/item_8/text = "1h"
+popup/item_8/id = 8
+popup/item_9/text = "Unlimited"
+popup/item_9/id = 9
+
+[node name="SessionHBox" type="HBoxContainer" parent="VerticalLayout"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VerticalLayout/SessionHBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Session Duration"
+
+[node name="SessionDurationButton" type="OptionButton" parent="VerticalLayout/SessionHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+item_count = 6
+selected = 2
+popup/item_0/text = "10m"
+popup/item_0/id = 0
+popup/item_1/text = "20m"
+popup/item_1/id = 1
+popup/item_2/text = "30m"
+popup/item_2/id = 2
+popup/item_3/text = "45m"
+popup/item_3/id = 3
+popup/item_4/text = "1h"
+popup/item_4/id = 4
+popup/item_5/text = "Untimed"
+popup/item_5/id = 5
+
+[node name="StartButton" type="Button" parent="VerticalLayout"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Start Roulette"
+
+[node name="RootDirectoryPicker" type="FileDialog" parent="."]
+title = "Open a Directory"
+ok_button_text = "Select Current Folder"
+file_mode = 2
+access = 2
+
+[connection signal="pressed" from="VerticalLayout/RootDirSelector/RootDirectoryButton" to="." method="_on_root_directory_button_pressed"]
+[connection signal="item_selected" from="VerticalLayout/IntervalHBox/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="VerticalLayout/SessionHBox/SessionDurationButton" to="." method="_on_session_duration_button_item_selected"]
+[connection signal="pressed" from="VerticalLayout/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="dir_selected" from="RootDirectoryPicker" to="." method="_on_root_directory_picker_dir_selected"]

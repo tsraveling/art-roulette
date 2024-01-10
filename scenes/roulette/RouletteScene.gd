@@ -37,8 +37,8 @@ func get_next():
 		current_path_label.text = disp_path
 	
 	# Start the timer
-	if TimeManager.selected_duration != TimeManager.UNLIMITED:
-		timer.wait_time = TimeManager.time_in_seconds(TimeManager.selected_duration)
+	if Session.selected_duration != Session.UNLIMITED:
+		timer.wait_time = Session.time_in_seconds(Session.selected_duration)
 		timer.start()
 
 # Called when the node enters the scene tree for the first time.
@@ -46,8 +46,8 @@ func _ready():
 	get_next()
 	
 	# Start the session otimer
-	if TimeManager.selected_session_duration != TimeManager.SESSION_UNLIMITED:
-		session_timer.wait_time = TimeManager.session_in_seconds(TimeManager.selected_session_duration)
+	if Session.selected_session_duration != Session.SESSION_UNLIMITED:
+		session_timer.wait_time = Session.session_in_seconds(Session.selected_session_duration)
 		session_timer.start()
 
 func timer_readout(time_left: float) -> String:
@@ -60,11 +60,11 @@ func _process(delta):
 	if Input.is_action_just_pressed("skip"):
 		get_next()
 	
-	if TimeManager.selected_duration != TimeManager.UNLIMITED:
+	if Session.selected_duration != Session.UNLIMITED:
 		timer_label.text = timer_readout(timer.time_left)
 		timer_label.modulate = Color.GREEN_YELLOW if timer.time_left > 15.0 else Color.RED
 	
-	if TimeManager.selected_session_duration != TimeManager.SESSION_UNLIMITED:
+	if Session.selected_session_duration != Session.SESSION_UNLIMITED:
 		session_timer_label.text = timer_readout(session_timer.time_left)
 		session_timer_label.modulate = Color.GREEN_YELLOW if session_timer.time_left > 60.0 else Color.RED
 
