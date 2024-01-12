@@ -8,7 +8,7 @@ var library_root: String = ""
 
 func save_config():
 	var config = ConfigFile.new()
-	config.set_value(APP_SECTION, LIBRARY_ROOT, Library.root)
+	config.set_value(APP_SECTION, LIBRARY_ROOT, library_root)
 	config.save(SETTINGS_FILE)
 
 func load_config():

@@ -29,7 +29,7 @@ func get_next():
 	image_count_label.text = "%d / %d left" % [FileBrowser.image_paths.size(), FileBrowser.total_images_loaded]
 	
 	# Load the image
-	var disp_path = image_path.replace(FileBrowser.root_directory, "")
+	var disp_path = image_path.replace(Config.library_root, "")
 	var image = Image.load_from_file(image_path)
 	if image != null:
 		var texture = ImageTexture.create_from_image(image)

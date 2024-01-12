@@ -3,7 +3,7 @@ extends Node
 func set_new_root(dir):
 	print(">>> set library root: %s" % dir)
 	Config.library_root = dir
-	Config.save()
+	Config.save_config()
 	# load_library()
 
 func load_library():

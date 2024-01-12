@@ -138,8 +138,14 @@ ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
 
+[node name="ChangeRootConfirmDialog" type="ConfirmationDialog" parent="."]
+initial_position = 1
+ok_button_text = "Change Root"
+dialog_text = "Are you sure you want to change your project root? This will create or load a new library folder witht a different database index.	"
+
 [connection signal="pressed" from="VerticalLayout/RootDirSelector/RootDirectoryButton" to="." method="_on_root_directory_button_pressed"]
 [connection signal="item_selected" from="VerticalLayout/IntervalHBox/OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="item_selected" from="VerticalLayout/SessionHBox/SessionDurationButton" to="." method="_on_session_duration_button_item_selected"]
 [connection signal="pressed" from="VerticalLayout/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="dir_selected" from="RootDirectoryPicker" to="." method="_on_root_directory_picker_dir_selected"]
+[connection signal="confirmed" from="ChangeRootConfirmDialog" to="." method="_on_change_root_confirm_dialog_confirmed"]

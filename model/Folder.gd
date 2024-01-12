@@ -10,7 +10,7 @@ var image_count: int
 func _init(path: String, included: bool = true):
 	self.path = path
 	self.included = included
-	self.display_path = path.replace(FileBrowser.root_directory, "")
+	self.display_path = path.replace(Config.library_root, "")
 	self.image_paths = get_images()
 	self.image_count = self.image_paths.size()
 
