@@ -9,23 +9,24 @@ var total_images_loaded: int = 0
 var initialized := false
 var is_root_initialized := false
 
-
-func process_dir(dir) -> Array[Folder]:
-	print("Processing directory: %s" % dir)
-	var ret: Array[Folder] = [Folder.new(dir)]
+func scan_dir(dir, callback):
 	var base_dir = DirAccess.open(dir)
+	var images: Array[String] = []
 	if base_dir:
 		base_dir.list_dir_begin()
 		var file_name = base_dir.get_next()
 		while file_name != "":
-			if base_dir.current_is_dir():
-				print("Found directory: " + file_name)
-				ret.append_array(process_dir("%s/%s" % [dir, file_name]))
+			if base_dir.current_is_dir(): # Folders
+				scan_dir("%s/%s" % [dir, file_name], callback)
+			else:
+				var ext_check = file_name.to_lower()
+				if !base_dir.current_is_dir() && (ext_check.ends_with(".png") || ext_check.ends_with(".jpg") || ext_check.ends_with(".jpeg")):
+					images.append("%s/%s" % [dir, file_name])
 			file_name = base_dir.get_next()
 	else:
 		print("Error occurred while trying to access path: %s" % base_dir)
 	
-	return ret
+	callback.call(dir, images)
 
 func load_active_images():
 	image_paths.clear()

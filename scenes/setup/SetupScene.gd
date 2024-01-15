@@ -6,6 +6,7 @@ extends Control
 @onready var duration_select := $VerticalLayout/IntervalHBox/OptionButton
 @onready var session_select := $VerticalLayout/SessionHBox/SessionDurationButton
 @onready var change_root_confirm := $ChangeRootConfirmDialog
+@onready var new_library_info_label := $VerticalLayout/NewLibraryInfoLabel
 
 var folder_item = preload("res://scenes/setup/folder_item.tscn")
 var requested_root_change: String = ""
@@ -15,6 +16,7 @@ func _ready():
 	root_dir_button.text = Config.library_root
 	duration_select.selected = Session.selected_duration
 	session_select.selected = Session.selected_session_duration
+	new_library_info_label.visible = Config.library_root == ""
 	refresh_list()
 
 func _on_root_directory_button_pressed():
@@ -32,11 +34,20 @@ func refresh_list():
 	for folder in FileBrowser.folders:
 		var list_item = folder_item.instantiate()
 		list_item.set_folder(folder)
-		folder_list.add_child(list_item)	
+		folder_list.add_child(list_item)
+
+func update_root(dir):
+	root_dir_button.text = dir
+	Library.set_new_root(dir)
+	refresh_list()
 
 func _on_root_directory_picker_dir_selected(dir):
-	requested_root_change = dir
-	change_root_confirm.show()
+	if Config.library_root != "":
+		requested_root_change = dir
+		change_root_confirm.show()
+	else:
+		update_root(dir)
+	new_library_info_label.visible = Config.library_root == ""
 
 func _on_start_button_pressed():
 	if !FileBrowser.initialized:
@@ -52,6 +63,4 @@ func _on_session_duration_button_item_selected(index):
 	Session.selected_session_duration = index
 
 func _on_change_root_confirm_dialog_confirmed():
-	root_dir_button.text = requested_root_change
-	Library.set_new_root(requested_root_change)
-	refresh_list()
+	update_root(requested_root_change)

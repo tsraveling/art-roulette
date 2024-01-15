@@ -34,6 +34,14 @@ offset_right = 300.0
 offset_bottom = -57.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="NewLibraryInfoLabel" type="Label" parent="VerticalLayout"]
+modulate = Color(1, 1, 0.721569, 1)
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+text = "You do not have a library root selected yet. Select a folder using the \"Root Directory\" button. Your project file (.arlibrary) will initialize in that root directory, and will have access to all subfolders within the library root."
+autowrap_mode = 2
 
 [node name="RootDirSelector" type="HBoxContainer" parent="VerticalLayout"]
 layout_mode = 2
