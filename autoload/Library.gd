@@ -33,6 +33,7 @@ func load_library():
 	
 	# TODO: Make this async at some point.
 	FileBrowser.scan_dir(Config.library_root, process_dir)
+	# STUB: Collect all of the folders here, and do an SQL query at the end to see if we are missing anything
 
 	# Additional logic to check if this is the first run can be implemented here
 	# For instance, you could check for the existence of any records in the tables

@@ -47,3 +47,10 @@ const CREATE_MIGRATIONS = """
 		log TEXT
 	)
 """
+
+static func create_folder(name, path):
+	var q = """
+		INSERT INTO folders (name, parent_id, path)
+		VALUES (?, ?, ?);
+	"""
+	# STUB: do `db.query_with_bindings(q, [name, path])`. And actually maybe just move this into its own autoload.
