@@ -21,6 +21,7 @@ Config="*res://autoload/Config.gd"
 Library="*res://autoload/Library.gd"
 FileBrowser="*res://autoload/FileBrowser.gd"
 Session="*res://autoload/Session.gd"
+Db="*res://autoload/Db.gd"
 
 [display]
 

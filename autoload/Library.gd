@@ -2,8 +2,6 @@ extends Node
 
 const LIBRARY_FILE := ".arlibrary"
 
-var db
-
 func set_new_root(dir):
 	print(">>> set library root: %s" % dir)
 	Config.library_root = dir
@@ -19,17 +17,7 @@ func load_library():
 	var library_path = "%s/%s" % [Config.library_root, LIBRARY_FILE]
 	print(">>> loading library file: %s" % library_path)
 	
-	# Initialize the SQLite database
-	db = SQLite.new()
-	db.path = library_path
-	db.open_db()
-
-	# Create the database
-	db.query(Queries.CREATE_FOLDERS)
-	db.query(Queries.CREATE_IMAGES)
-	db.query(Queries.CREATE_TAGS)
-	db.query(Queries.CREATE_IMAGE_TAGS)
-	db.query(Queries.CREATE_MIGRATIONS)
+	Db.initialize_in_root(library_path)
 	
 	# TODO: Make this async at some point.
 	FileBrowser.scan_dir(Config.library_root, process_dir)
@@ -37,9 +25,6 @@ func load_library():
 
 	# Additional logic to check if this is the first run can be implemented here
 	# For instance, you could check for the existence of any records in the tables
-
-	# Close the database if not in use immediately
-	db.close_db()
 
 func _ready():
 	if Config.library_root != "":
