@@ -8,11 +8,6 @@ func set_new_root(dir):
 	Config.save_config()
 	load_library()
 
-func process_dir(path, image_list):
-	print(">>> %s (%d)" % [path, image_list.size()])
-	# STUB: Add a record or retreive the folder with this path (might require index)
-	# STUB: Add a record for each image in image_list if it doesn't exist already
-
 func load_library():
 	var library_path = "%s/%s" % [Config.library_root, LIBRARY_FILE]
 	print(">>> loading library file: %s" % library_path)
@@ -20,7 +15,9 @@ func load_library():
 	Db.initialize_in_root(library_path)
 	
 	# TODO: Make this async at some point.
-	FileBrowser.scan_dir(Config.library_root, process_dir)
+	Db.begin()
+	FileBrowser.scan_dir(Config.library_root, null)
+	Db.end()
 	# STUB: Collect all of the folders here, and do an SQL query at the end to see if we are missing anything
 
 	# Additional logic to check if this is the first run can be implemented here

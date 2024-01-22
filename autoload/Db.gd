@@ -18,23 +18,25 @@ func initialize_in_root(library_path):
 	
 	db.close_db()
 
-func create_folder(name, path):
-	var find_query = """
-		SELECT id FROM folders WHERE path = ?;
-	"""
-	var result = db.query_with_bindings(find_query, [path])
-	if result.empty():
-		var insert_query = """
-			INSERT INTO folders (name, parent_id, path)
-			VALUES (?, ?, ?);
-		"""
-		db.query_with_bindings(insert_query, [name, null, path])  # Assuming parent_id is null for simplicity
-		result = db.query_with_bindings(find_query, [path])  # Re-query to get the newly inserted ID
+func create_folder(folder_name, parent_id, path):
+	var result = db.select_rows("folders", "path='%s'" % path, ["*"])
+	if result.is_empty():
+		var row_dict = {
+			"name": folder_name,
+			"path": path
+		}
+		if parent_id != null:
+			row_dict["parent_id"] = parent_id
+		db.insert_row("folders", row_dict)
+		return db.last_insert_rowid
+	else:
+		return result[0]["id"]
+		
+func begin():
+	db.open_db()
 
-	# STUB: query just returns a boolean. We have to use select or something. Do this next
-	return 0 #result[0]["id"]  # Returning the ID
-
-
+func end():
+	db.close_db()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

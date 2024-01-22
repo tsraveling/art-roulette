@@ -9,7 +9,7 @@ var total_images_loaded: int = 0
 var initialized := false
 var is_root_initialized := false
 
-func scan_dir(dir, callback):
+func scan_dir(dir, parent_id):
 	var base_dir = DirAccess.open(dir)
 	var images: Array[String] = []
 	if base_dir:
@@ -17,16 +17,16 @@ func scan_dir(dir, callback):
 		var file_name = base_dir.get_next()
 		while file_name != "":
 			if base_dir.current_is_dir(): # Folders
-				scan_dir("%s/%s" % [dir, file_name], callback)
+				var folder_id = Db.create_folder(file_name, parent_id, "%s/%s" % [dir, file_name])
+				scan_dir("%s/%s" % [dir, file_name], folder_id)
 			else:
 				var ext_check = file_name.to_lower()
 				if !base_dir.current_is_dir() && (ext_check.ends_with(".png") || ext_check.ends_with(".jpg") || ext_check.ends_with(".jpeg")):
+					# STUB: Call db.create_images (make this method first)
 					images.append("%s/%s" % [dir, file_name])
 			file_name = base_dir.get_next()
 	else:
 		print("Error occurred while trying to access path: %s" % base_dir)
-	
-	callback.call(dir, images)
 
 func load_active_images():
 	image_paths.clear()
