@@ -1,5 +1,7 @@
 extends Node
 
+const DEBUG_CLEAR_ON_START := true
+
 var db: SQLite
 
 func initialize_in_root(library_path):
@@ -7,8 +9,9 @@ func initialize_in_root(library_path):
 	# Initialize the SQLite database
 	db = SQLite.new()
 	db.path = library_path
+	db.foreign_keys = true
 	db.open_db()
-
+	
 	# Create the database
 	db.query(CreateQueries.CREATE_FOLDERS)
 	db.query(CreateQueries.CREATE_IMAGES)
@@ -16,10 +19,26 @@ func initialize_in_root(library_path):
 	db.query(CreateQueries.CREATE_IMAGE_TAGS)
 	db.query(CreateQueries.CREATE_MIGRATIONS)
 	
+	if DEBUG_CLEAR_ON_START:
+		print(">>> deleting previous ...")
+		db.query("DELETE FROM folders")
+		db.query("DELETE FROM images")
+	
 	db.close_db()
 
+func create_images(row_list):
+	db.insert_rows("images", row_list)
+
+func get_image_list(folder_id) -> Array[String]:
+	var conditional = ("folder_id='%s'" % str(folder_id)) if folder_id != null else "folder_id IS NULL"
+	var images = db.select_rows("images", conditional, ["title"])
+	var ret: Array[String] = []
+	for img in images:
+		ret.append(img["title"])
+	return ret
+
 func create_folder(folder_name, parent_id, path):
-	var result = db.select_rows("folders", "path='%s'" % path, ["*"])
+	var result = db.select_rows("folders", "path='%s'" % path, ["id"])
 	if result.is_empty():
 		var row_dict = {
 			"name": folder_name,

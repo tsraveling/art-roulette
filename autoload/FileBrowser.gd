@@ -11,20 +11,37 @@ var is_root_initialized := false
 
 func scan_dir(dir, parent_id):
 	var base_dir = DirAccess.open(dir)
-	var images: Array[String] = []
 	if base_dir:
+		var image_list = Db.get_image_list(parent_id)
 		base_dir.list_dir_begin()
 		var file_name = base_dir.get_next()
+		var insert_rows = []
 		while file_name != "":
+			var this_path = "%s/%s" % [dir, file_name]
 			if base_dir.current_is_dir(): # Folders
-				var folder_id = Db.create_folder(file_name, parent_id, "%s/%s" % [dir, file_name])
-				scan_dir("%s/%s" % [dir, file_name], folder_id)
+				var folder_id = Db.create_folder(file_name, parent_id, this_path)
+				scan_dir(this_path, folder_id)
 			else:
 				var ext_check = file_name.to_lower()
 				if !base_dir.current_is_dir() && (ext_check.ends_with(".png") || ext_check.ends_with(".jpg") || ext_check.ends_with(".jpeg")):
 					# STUB: Call db.create_images (make this method first)
-					images.append("%s/%s" % [dir, file_name])
+					# OPT: Could batch this with `insert_rows`.
+					if !image_list.has(file_name):
+						var row_dict = {
+							"title": file_name,
+							"file_path": this_path
+						}
+						if parent_id != null:
+							row_dict["folder_id"] = parent_id
+						insert_rows.append(row_dict)
+						
 			file_name = base_dir.get_next()
+		if !insert_rows.is_empty():
+			print("Inserting %d rows for %s" % [insert_rows.size(), dir])
+			Db.create_images(insert_rows)
+		Library.new_images_this_session += insert_rows.size()
+		Library.total_images += (insert_rows.size() + image_list.size())
+		Library.total_folders += 1
 	else:
 		print("Error occurred while trying to access path: %s" % base_dir)
 

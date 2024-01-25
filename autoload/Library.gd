@@ -2,6 +2,10 @@ extends Node
 
 const LIBRARY_FILE := ".arlibrary"
 
+var total_folders := 0
+var total_images := 0
+var new_images_this_session := 0
+
 func set_new_root(dir):
 	print(">>> set library root: %s" % dir)
 	Config.library_root = dir
@@ -18,6 +22,10 @@ func load_library():
 	Db.begin()
 	FileBrowser.scan_dir(Config.library_root, null)
 	Db.end()
+	
+	print(">>> %d folders" % total_folders)
+	print(">>> %d images" % total_images)
+	print(">>> %d added this session" % new_images_this_session)
 	# STUB: Collect all of the folders here, and do an SQL query at the end to see if we are missing anything
 
 	# Additional logic to check if this is the first run can be implemented here
