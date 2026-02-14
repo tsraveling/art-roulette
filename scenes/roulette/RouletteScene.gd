@@ -21,6 +21,8 @@ var last_mouse_pos := Vector2.ZERO
 const ZOOM_MIN := 1.0
 const ZOOM_MAX := 5.0
 const ZOOM_STEP := 0.15
+const PINCH_SENSITIVITY := 5.0
+const PAN_SENSITIVITY := 10.0
 
 func _reset_zoom():
 	zoom_level = 1.0
@@ -48,6 +50,14 @@ func _zoom_at(mouse_pos: Vector2, step: float):
 
 	_apply_zoom()
 
+
+func _input(event):
+	if event is InputEventMagnifyGesture:
+		var step = (event.factor - 1.0) * ZOOM_STEP * PINCH_SENSITIVITY
+		_zoom_at(image_clip.get_local_mouse_position(), step)
+	elif event is InputEventPanGesture and zoom_level > ZOOM_MIN:
+		pan_offset -= event.delta * PAN_SENSITIVITY
+		_apply_zoom()
 
 func get_next():
 	_reset_zoom()
