@@ -1,9 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cssae6c3v2twh"]
+[gd_scene format=3 uid="uid://cssae6c3v2twh"]
 
-[ext_resource type="Script" path="res://scenes/setup/SetupScene.gd" id="1_igmc0"]
-[ext_resource type="PackedScene" uid="uid://ct7i5tbswuu20" path="res://scenes/setup/folder_item.tscn" id="2_6l3o5"]
+[ext_resource type="Script" uid="uid://bt4h5w4od8hmm" path="res://scenes/setup/SetupScene.gd" id="1_igmc0"]
 
-[node name="SetupScene" type="Control"]
+[node name="SetupScene" type="Control" unique_id=1816217544]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_igmc0")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1946122905]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.109804, 0.109804, 0.109804, 1)
 
-[node name="VerticalLayout" type="VBoxContainer" parent="."]
+[node name="VerticalLayout" type="VBoxContainer" parent="." unique_id=1871658473]
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 1
 anchors_preset = 13
@@ -35,49 +34,38 @@ offset_bottom = -57.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RootDirSelector" type="HBoxContainer" parent="VerticalLayout"]
+[node name="RootDirSelector" type="HBoxContainer" parent="VerticalLayout" unique_id=290006326]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="VerticalLayout/RootDirSelector"]
+[node name="Label" type="Label" parent="VerticalLayout/RootDirSelector" unique_id=1637436822]
 layout_mode = 2
 text = "Root directory"
 
-[node name="RootDirectoryButton" type="Button" parent="VerticalLayout/RootDirSelector"]
+[node name="RootDirectoryButton" type="Button" parent="VerticalLayout/RootDirSelector" unique_id=590613266]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "/documents"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VerticalLayout"]
+[node name="FolderTree" type="Tree" parent="VerticalLayout" unique_id=1708923256]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VerticalLayout/ScrollContainer"]
+[node name="IntervalHBox" type="HBoxContainer" parent="VerticalLayout" unique_id=1443747404]
 layout_mode = 2
 
-[node name="FolderList" type="VBoxContainer" parent="VerticalLayout/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="FolderItem" parent="VerticalLayout/ScrollContainer/VBoxContainer/FolderList" instance=ExtResource("2_6l3o5")]
-layout_mode = 2
-
-[node name="IntervalHBox" type="HBoxContainer" parent="VerticalLayout"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="VerticalLayout/IntervalHBox"]
+[node name="Label" type="Label" parent="VerticalLayout/IntervalHBox" unique_id=165845600]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Time per sketch:"
 
-[node name="OptionButton" type="OptionButton" parent="VerticalLayout/IntervalHBox"]
+[node name="OptionButton" type="OptionButton" parent="VerticalLayout/IntervalHBox" unique_id=2063450302]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
-item_count = 10
 selected = 2
+item_count = 10
 popup/item_0/text = "30s"
 popup/item_0/id = 0
 popup/item_1/text = "1m"
@@ -99,21 +87,21 @@ popup/item_8/id = 8
 popup/item_9/text = "Unlimited"
 popup/item_9/id = 9
 
-[node name="SessionHBox" type="HBoxContainer" parent="VerticalLayout"]
+[node name="SessionHBox" type="HBoxContainer" parent="VerticalLayout" unique_id=1856254413]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VerticalLayout/SessionHBox"]
+[node name="Label" type="Label" parent="VerticalLayout/SessionHBox" unique_id=592712128]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Session Duration"
 
-[node name="SessionDurationButton" type="OptionButton" parent="VerticalLayout/SessionHBox"]
+[node name="SessionDurationButton" type="OptionButton" parent="VerticalLayout/SessionHBox" unique_id=233667801]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
-item_count = 6
 selected = 2
+item_count = 6
 popup/item_0/text = "10m"
 popup/item_0/id = 0
 popup/item_1/text = "20m"
@@ -127,12 +115,12 @@ popup/item_4/id = 4
 popup/item_5/text = "Untimed"
 popup/item_5/id = 5
 
-[node name="StartButton" type="Button" parent="VerticalLayout"]
+[node name="StartButton" type="Button" parent="VerticalLayout" unique_id=931336967]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Start Roulette"
 
-[node name="RootDirectoryPicker" type="FileDialog" parent="."]
+[node name="RootDirectoryPicker" type="FileDialog" parent="." unique_id=210030713]
 title = "Open a Directory"
 ok_button_text = "Select Current Folder"
 file_mode = 2

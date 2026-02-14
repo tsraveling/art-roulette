@@ -1,10 +1,14 @@
 extends Control
 
+# This is all the previous way of doing it:
 @onready var root_dir_picker := $RootDirectoryPicker
 @onready var root_dir_button := $VerticalLayout/RootDirSelector/RootDirectoryButton
 @onready var folder_list := $VerticalLayout/ScrollContainer/VBoxContainer/FolderList
 @onready var duration_select := $VerticalLayout/IntervalHBox/OptionButton
 @onready var session_select := $VerticalLayout/SessionHBox/SessionDurationButton
+
+# This will be our new UI element:
+@onready var folder_tree := $VerticalLayout/FolderTree
 
 var folder_item = preload("res://scenes/setup/folder_item.tscn")
 
