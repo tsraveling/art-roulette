@@ -8,6 +8,7 @@ extends Control
 @onready var ui_scale_slider := $MainLayout/SettingsPanel/UIScaleHBox/UIScaleSlider
 @onready var ui_scale_label := $MainLayout/SettingsPanel/UIScaleHBox/UIScaleLabel
 @onready var description_label := $MainLayout/VariationsPanel/DescriptionLabel
+@onready var version_label := $VersionLabel
 
 const MODE_DESCRIPTIONS := {
 	FileBrowser.RouletteMode.STANDARD:
@@ -26,6 +27,7 @@ func _ready():
 	ui_scale_slider.value = FileBrowser.ui_scale
 	ui_scale_label.text = "%sx" % str(FileBrowser.ui_scale)
 	description_label.text = MODE_DESCRIPTIONS[FileBrowser.selected_mode]
+	version_label.text = "v%s" % ProjectSettings.get_setting("application/config/version", "dev")
 	refresh_list()
 
 func _on_root_directory_button_pressed():
