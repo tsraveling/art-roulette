@@ -1,6 +1,9 @@
 extends Node
 
+enum RouletteMode { STANDARD, STUDY }
+
 var root_directory: String = "Pick a folder"
+var selected_mode := RouletteMode.STANDARD
 var folders: Array[Folder] = []
 var image_paths: Array[String] = []
 var image_paths_skipped: Array[String] = []
@@ -49,11 +52,24 @@ func load_active_images():
 	image_paths.clear()
 	image_paths_skipped.clear()
 	image_paths_done.clear()
-	for folder in folders:
-		if folder.included:
-			image_paths.append_array(folder.image_paths)
+
+	match selected_mode:
+		RouletteMode.STANDARD:
+			# Draw from all selected folders at random
+			for folder in folders:
+				if folder.included:
+					image_paths.append_array(folder.image_paths)
+		RouletteMode.STUDY:
+			# Pick one folder with >1 image; draw only from it for the session
+			var candidates: Array[Folder] = []
+			for folder in folders:
+				if folder.included and folder.image_count > 1:
+					candidates.append(folder)
+			if candidates.size() > 0:
+				var chosen = candidates[randi() % candidates.size()]
+				image_paths.append_array(chosen.image_paths)
+
 	total_images_loaded = image_paths.size()
-	print("Loaded %d images" % total_images_loaded)
 	
 func pop_next(did_finish: bool = true) -> String:
 	
