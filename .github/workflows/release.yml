@@ -39,6 +39,10 @@ jobs:
           mkdir -p build/windows
           godot --headless --export-release "Windows Desktop" build/windows/ArtRoulette.exe
 
+      - name: Disable macOS codesigning for CI
+        run: |
+          sed -i 's|codesign/codesign=3|codesign/codesign=0|' export_presets.cfg
+
       - name: Export macOS
         run: |
           mkdir -p build/macos
