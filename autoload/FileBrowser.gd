@@ -10,18 +10,15 @@ var initialized := false
 
 func save_root():
 	var config = ConfigFile.new()
-	print(">>> saving ....")
 	config.set_value("root", "root_directory", root_directory)
 	config.save("user://settings.cfg")
 
 func set_new_root(dir):
-	print(">>> set root: %s" % dir)
 	root_directory = dir
 	save_root()
 	load_root_dir()
 
 func process_dir(dir) -> Array[Folder]:
-	print("Processing directory: %s" % dir)
 	var ret: Array[Folder] = [Folder.new(dir)]
 	var base_dir = DirAccess.open(dir)
 	if base_dir:
@@ -29,7 +26,6 @@ func process_dir(dir) -> Array[Folder]:
 		var file_name = base_dir.get_next()
 		while file_name != "":
 			if base_dir.current_is_dir():
-				print("Found directory: " + file_name)
 				ret.append_array(process_dir("%s/%s" % [dir, file_name]))
 			file_name = base_dir.get_next()
 	else:
