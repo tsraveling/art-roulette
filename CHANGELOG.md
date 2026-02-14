@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.1.1 - 2026-02-14
+#### Bug Fixes
+- added release workflows - (1f5cbeb) - Tim Raveling
+- added version numbers - (7c16114) - Tim Raveling
+
+- - -
+
 ## 0.1.0 - 2026-02-14
 #### Features
 - added study mode variant - (facbaf3) - Tim Raveling
