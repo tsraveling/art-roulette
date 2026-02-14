@@ -11,10 +11,7 @@ extends Control
 @onready var pause_play_button := $VerticalLayout/MarginContainer/ToolBar/PausePlayButton
 @onready var session_timer_label := $VerticalLayout/MarginContainer/ToolBar/SessionTimerLabel
 @onready var session_timer := $SessionTimer
-
-# STUB: On pick, pop the picked image and put it in a "done" array
-# STUB: Add timers
-# STUB: Clicking a checkbox on or off
+@onready var session_dialog := $ConfirmationDialog
 
 func get_next():
 	
@@ -44,11 +41,15 @@ func get_next():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_next()
-	
-	# Start the session otimer
+
+	# Start the session timer
 	if TimeManager.selected_session_duration != TimeManager.SESSION_UNLIMITED:
 		session_timer.wait_time = TimeManager.session_in_seconds(TimeManager.selected_session_duration)
 		session_timer.start()
+
+	session_timer.timeout.connect(_on_session_timer_timeout)
+	session_dialog.confirmed.connect(_on_session_dialog_confirmed)
+	session_dialog.canceled.connect(_on_session_dialog_canceled)
 
 func timer_readout(time_left: float) -> String:
 	var minutes = int(time_left / 60)
@@ -110,3 +111,18 @@ func _on_pause_play_button_pressed():
 	timer.paused = !timer.paused
 	session_timer.paused = timer.paused
 	pause_play_button.text = "Resume" if timer.paused else "Pause"
+
+func _on_session_timer_timeout():
+	timer.paused = true
+	session_timer.paused = true
+	session_dialog.popup_centered()
+
+func _on_session_dialog_confirmed():
+	# "I'm Finished" — go back to setup
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	get_tree().change_scene_to_file("res://scenes/setup/SetupScene.tscn")
+
+func _on_session_dialog_canceled():
+	# "Continue Drawing" — unpause and keep going
+	timer.paused = false
+	session_timer.paused = false
