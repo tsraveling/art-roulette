@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://brfyn2p2tmcjs"]
+[gd_scene format=3 uid="uid://brfyn2p2tmcjs"]
 
-[ext_resource type="Script" path="res://scenes/roulette/RouletteScene.gd" id="1_xx47x"]
+[ext_resource type="Script" uid="uid://cmw3mp1bstwlt" path="res://scenes/roulette/RouletteScene.gd" id="1_xx47x"]
 
-[node name="RouletteScene" type="Control"]
+[node name="RouletteScene" type="Control" unique_id=1704511003]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xx47x")
 
-[node name="VerticalLayout" type="VBoxContainer" parent="."]
+[node name="VerticalLayout" type="VBoxContainer" parent="." unique_id=1029910407]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,66 +19,75 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VerticalLayout"]
+[node name="MarginContainer" type="MarginContainer" parent="VerticalLayout" unique_id=623296222]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 4
 
-[node name="ToolBar" type="HBoxContainer" parent="VerticalLayout/MarginContainer"]
+[node name="ToolBar" type="HBoxContainer" parent="VerticalLayout/MarginContainer" unique_id=382003743]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 alignment = 2
 
-[node name="CurrentPathLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar"]
+[node name="CurrentPathLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=1096560449]
 layout_mode = 2
 size_flags_horizontal = 3
 text_overrun_behavior = 2
 
-[node name="ImageCountLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar"]
+[node name="ImageCountLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=1389091387]
 layout_mode = 2
 
-[node name="FocusButton" type="CheckButton" parent="VerticalLayout/MarginContainer/ToolBar"]
+[node name="FocusButton" type="CheckButton" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=410906025]
 layout_mode = 2
 focus_mode = 0
 text = "Focus"
 
-[node name="TimerLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar"]
+[node name="TimerLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=1066857798]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "~"
 
-[node name="NextButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar"]
+[node name="NextButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=1491614102]
 layout_mode = 2
 text = "Next Image"
 
-[node name="AddTimeButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar"]
+[node name="AddTimeButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=1648369871]
 layout_mode = 2
 text = "Add Time"
 
-[node name="PausePlayButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar"]
+[node name="PausePlayButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=553824922]
 layout_mode = 2
 text = "Pause"
 
-[node name="DoneButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar"]
+[node name="DoneButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=794869871]
 layout_mode = 2
 text = "Done	"
 
-[node name="SessionTimerLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar"]
+[node name="SessionTimerLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=1692277510]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "~"
 
-[node name="ImageRect" type="TextureRect" parent="VerticalLayout"]
+[node name="ImageClip" type="Control" parent="VerticalLayout" unique_id=1534587344]
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="ImageRect" type="TextureRect" parent="VerticalLayout/ImageClip" unique_id=328963044]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=947083269]
 
-[node name="MoreTimeMenu" type="PopupMenu" parent="."]
+[node name="MoreTimeMenu" type="PopupMenu" parent="." unique_id=101685832]
 item_count = 5
 item_0/text = "1m"
 item_0/id = 0
@@ -91,9 +100,9 @@ item_3/id = 3
 item_4/text = "20m"
 item_4/id = 4
 
-[node name="SessionTimer" type="Timer" parent="."]
+[node name="SessionTimer" type="Timer" parent="." unique_id=1091029125]
 
-[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=1853119864]
 title = "Session Complete"
 ok_button_text = "I'm Finished"
 cancel_button_text = "Continue Drawing"

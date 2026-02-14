@@ -1,6 +1,7 @@
 extends Control
 
-@onready var image_rect := $VerticalLayout/ImageRect
+@onready var image_clip := $VerticalLayout/ImageClip
+@onready var image_rect := $VerticalLayout/ImageClip/ImageRect
 @onready var image_count_label := $VerticalLayout/MarginContainer/ToolBar/ImageCountLabel
 @onready var current_path_label := $VerticalLayout/MarginContainer/ToolBar/CurrentPathLabel
 @onready var next_button := $VerticalLayout/MarginContainer/ToolBar/NextButton
@@ -13,8 +14,44 @@ extends Control
 @onready var session_timer := $SessionTimer
 @onready var session_dialog := $ConfirmationDialog
 
+var zoom_level := 1.0
+var pan_offset := Vector2.ZERO
+var last_mouse_pos := Vector2.ZERO
+
+const ZOOM_MIN := 1.0
+const ZOOM_MAX := 5.0
+const ZOOM_STEP := 0.15
+
+func _reset_zoom():
+	zoom_level = 1.0
+	pan_offset = Vector2.ZERO
+	image_rect.scale = Vector2.ONE
+	image_rect.position = Vector2.ZERO
+
+func _apply_zoom():
+	image_rect.scale = Vector2.ONE * zoom_level
+	image_rect.position = pan_offset
+
+func _zoom_at(mouse_pos: Vector2, step: float):
+	var old_zoom = zoom_level
+	zoom_level = clampf(zoom_level + step, ZOOM_MIN, ZOOM_MAX)
+	if zoom_level == old_zoom:
+		return
+
+	# Adjust pan so the point under the cursor stays fixed
+	var focus = (mouse_pos - pan_offset) / old_zoom
+	pan_offset = mouse_pos - focus * zoom_level
+
+	# Snap back to origin when fully zoomed out
+	if zoom_level == ZOOM_MIN:
+		pan_offset = Vector2.ZERO
+
+	_apply_zoom()
+
+
 func get_next():
-	
+	_reset_zoom()
+
 	var image_path = FileBrowser.pop_next()
 	if image_path == "":
 		image_rect.texture = null
@@ -57,9 +94,20 @@ func timer_readout(time_left: float) -> String:
 	return "%02d:%02d" % [minutes, seconds]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("skip"):
 		get_next()
+
+	if Input.is_action_just_pressed("zoom_in"):
+		_zoom_at(image_clip.get_local_mouse_position(), ZOOM_STEP)
+	elif Input.is_action_just_pressed("zoom_out"):
+		_zoom_at(image_clip.get_local_mouse_position(), -ZOOM_STEP)
+
+	var current_mouse_pos = get_viewport().get_mouse_position()
+	if Input.is_action_pressed("l_click") and zoom_level > ZOOM_MIN:
+		pan_offset += current_mouse_pos - last_mouse_pos
+		_apply_zoom()
+	last_mouse_pos = current_mouse_pos
 	
 	if TimeManager.selected_duration != TimeManager.UNLIMITED:
 		timer_label.text = timer_readout(timer.time_left)
