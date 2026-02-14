@@ -7,15 +7,22 @@ var image_paths_skipped: Array[String] = []
 var image_paths_done: Array[String] = []
 var total_images_loaded: int = 0
 var initialized := false
+var ui_scale := 1.0
 
-func save_root():
+func save_settings():
 	var config = ConfigFile.new()
 	config.set_value("root", "root_directory", root_directory)
+	config.set_value("display", "ui_scale", ui_scale)
 	config.save("user://settings.cfg")
+
+func set_ui_scale(scale: float):
+	ui_scale = scale
+	get_tree().root.content_scale_factor = ui_scale
+	save_settings()
 
 func set_new_root(dir):
 	root_directory = dir
-	save_root()
+	save_settings()
 	load_root_dir()
 
 func process_dir(dir) -> Array[Folder]:
@@ -84,5 +91,9 @@ func _ready():
 	var saved_root = config.get_value("root", "root_directory")
 	if saved_root != null:
 		root_directory = saved_root
-		print("Loaded root: %s", saved_root)
 		load_root_dir()
+
+	var saved_scale = config.get_value("display", "ui_scale")
+	if saved_scale != null:
+		ui_scale = saved_scale
+		get_tree().root.content_scale_factor = ui_scale

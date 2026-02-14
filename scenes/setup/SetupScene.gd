@@ -5,6 +5,8 @@ extends Control
 @onready var duration_select := $VerticalLayout/IntervalHBox/OptionButton
 @onready var session_select := $VerticalLayout/SessionHBox/SessionDurationButton
 @onready var folder_tree := $VerticalLayout/FolderTree
+@onready var ui_scale_slider := $VerticalLayout/UIScaleHBox/UIScaleSlider
+@onready var ui_scale_label := $VerticalLayout/UIScaleHBox/UIScaleLabel
 
 var _updating_tree := false
 
@@ -13,6 +15,8 @@ func _ready():
 	duration_select.selected = TimeManager.selected_duration
 	session_select.selected = TimeManager.selected_session_duration
 	folder_tree.item_edited.connect(_on_folder_tree_item_edited)
+	ui_scale_slider.value = FileBrowser.ui_scale
+	ui_scale_label.text = "%sx" % str(FileBrowser.ui_scale)
 	refresh_list()
 
 func _on_root_directory_button_pressed():
@@ -112,3 +116,7 @@ func _on_option_button_item_selected(index):
 
 func _on_session_duration_button_item_selected(index):
 	TimeManager.selected_session_duration = index
+
+func _on_ui_scale_slider_value_changed(value: float):
+	ui_scale_label.text = "%sx" % str(value)
+	FileBrowser.set_ui_scale(value)
