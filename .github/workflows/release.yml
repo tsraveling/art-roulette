@@ -51,8 +51,9 @@ jobs:
           cd build/macos
           unzip -q ArtRoulette.zip
           rm ArtRoulette.zip
-          codesign --force --deep --sign - ArtRoulette.app
-          zip -r -y ArtRoulette.zip ArtRoulette.app
+          APP_NAME=$(ls -d *.app)
+          codesign --force --deep --sign - "$APP_NAME"
+          zip -r -y ArtRoulette.zip "$APP_NAME"
           cd ../..
 
       - name: Export Linux
