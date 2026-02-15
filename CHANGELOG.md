@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.1.6 - 2026-02-15
+#### Bug Fixes
+- app name codesisgning issue - (c0f6dfb) - Tim Raveling
+
+- - -
+
 ## 0.1.5 - 2026-02-15
 #### Bug Fixes
 - ad-hoc sign macOS build to prevent damaged error - (49ecda3) - Tim Raveling
