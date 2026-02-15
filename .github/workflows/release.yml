@@ -48,6 +48,12 @@ jobs:
         run: |
           mkdir -p build/macos
           godot --headless --export-release "macOS" build/macos/ArtRoulette.zip
+          cd build/macos
+          unzip -q ArtRoulette.zip
+          rm ArtRoulette.zip
+          codesign --force --deep --sign - ArtRoulette.app
+          zip -r -y ArtRoulette.zip ArtRoulette.app
+          cd ../..
 
       - name: Export Linux
         run: |
