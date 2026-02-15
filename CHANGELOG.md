@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.1.4 - 2026-02-15
+#### Bug Fixes
+- updated mac builder action - (a15e7ba) - Tim Raveling
+
+- - -
+
 ## 0.1.3 - 2026-02-14
 #### Bug Fixes
 - disable macOS codesigning in CI workflow - (2c6bc11) - Tim Raveling
