@@ -76,6 +76,7 @@ func get_next():
 	var disp_path = image_path.replace(FileBrowser.root_directory, "")
 	var image = Image.load_from_file(image_path)
 	if image != null:
+		ExifOrientation.fix(image, image_path)
 		var texture = ImageTexture.create_from_image(image)
 		image_rect.texture = texture
 		current_path_label.text = disp_path
@@ -107,6 +108,9 @@ func timer_readout(time_left: float) -> String:
 func _process(_delta):
 	if Input.is_action_just_pressed("skip"):
 		get_next()
+
+	if Input.is_action_just_pressed("pause"):
+		_on_pause_play_button_pressed()
 
 	if Input.is_action_just_pressed("zoom_in"):
 		_zoom_at(image_clip.get_local_mouse_position(), ZOOM_STEP)
