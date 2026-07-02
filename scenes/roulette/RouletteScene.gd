@@ -13,6 +13,7 @@ extends Control
 @onready var session_timer_label := $VerticalLayout/MarginContainer/ToolBar/SessionTimerLabel
 @onready var session_timer := $SessionTimer
 @onready var session_dialog := $ConfirmationDialog
+@onready var help_dialog := $HelpDialog
 
 var zoom_level := 1.0
 var pan_offset := Vector2.ZERO
@@ -140,6 +141,10 @@ func _on_done_button_pressed():
 
 func _on_next_button_pressed():
 	get_next()
+
+
+func _on_help_button_pressed():
+	help_dialog.popup_centered()
 
 
 func _on_focus_button_toggled(button_pressed):

@@ -70,6 +70,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "~"
 
+[node name="HelpButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=1096560448]
+layout_mode = 2
+focus_mode = 0
+text = " ? "
+
 [node name="ImageClip" type="Control" parent="VerticalLayout" unique_id=1534587344]
 clip_contents = true
 layout_mode = 2
@@ -107,6 +112,77 @@ title = "Session Complete"
 ok_button_text = "I'm Finished"
 cancel_button_text = "Continue Drawing"
 
+[node name="HelpDialog" type="AcceptDialog" parent="." unique_id=1853119865]
+title = "Keyboard Shortcuts"
+size = Vector2i(280, 220)
+
+[node name="Columns" type="HBoxContainer" parent="HelpDialog" unique_id=1853119866]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="Keys" type="VBoxContainer" parent="HelpDialog/Columns" unique_id=1853119867]
+layout_mode = 2
+
+[node name="K0" type="Label" parent="HelpDialog/Columns/Keys" unique_id=1853119868]
+layout_mode = 2
+text = "Space"
+
+[node name="K1" type="Label" parent="HelpDialog/Columns/Keys" unique_id=1853119869]
+layout_mode = 2
+text = "P"
+
+[node name="K2" type="Label" parent="HelpDialog/Columns/Keys" unique_id=1853119870]
+layout_mode = 2
+text = "= / +"
+
+[node name="K3" type="Label" parent="HelpDialog/Columns/Keys" unique_id=1853119871]
+layout_mode = 2
+text = "-"
+
+[node name="K4" type="Label" parent="HelpDialog/Columns/Keys" unique_id=1853119872]
+layout_mode = 2
+text = "Left drag"
+
+[node name="K5" type="Label" parent="HelpDialog/Columns/Keys" unique_id=1853119873]
+layout_mode = 2
+text = "Scroll / pinch"
+
+[node name="Actions" type="VBoxContainer" parent="HelpDialog/Columns" unique_id=1853119874]
+layout_mode = 2
+
+[node name="A0" type="Label" parent="HelpDialog/Columns/Actions" unique_id=1853119875]
+layout_mode = 2
+text = "Next image"
+
+[node name="A1" type="Label" parent="HelpDialog/Columns/Actions" unique_id=1853119876]
+layout_mode = 2
+text = "Pause / Resume"
+
+[node name="A2" type="Label" parent="HelpDialog/Columns/Actions" unique_id=1853119877]
+layout_mode = 2
+text = "Zoom in"
+
+[node name="A3" type="Label" parent="HelpDialog/Columns/Actions" unique_id=1853119878]
+layout_mode = 2
+text = "Zoom out"
+
+[node name="A4" type="Label" parent="HelpDialog/Columns/Actions" unique_id=1853119879]
+layout_mode = 2
+text = "Pan (when zoomed)"
+
+[node name="A5" type="Label" parent="HelpDialog/Columns/Actions" unique_id=1853119880]
+layout_mode = 2
+text = "Zoom"
+
+[connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/HelpButton" to="." method="_on_help_button_pressed"]
 [connection signal="toggled" from="VerticalLayout/MarginContainer/ToolBar/FocusButton" to="." method="_on_focus_button_toggled"]
 [connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/AddTimeButton" to="." method="_on_add_time_button_pressed"]
