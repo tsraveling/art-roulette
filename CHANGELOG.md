@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.1.7 - 2026-07-02
+#### Bug Fixes
+- adds help dialog - (1850da4) - Tim Raveling
+- timer text yellow when paused - (fc183ce) - Tim Raveling
+- adds exif support - (af0b563) - Tim Raveling
+
+- - -
+
 ## 0.1.6 - 2026-02-15
 #### Bug Fixes
 - app name codesisgning issue - (c0f6dfb) - Tim Raveling
