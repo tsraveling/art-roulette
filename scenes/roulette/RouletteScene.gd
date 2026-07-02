@@ -125,7 +125,10 @@ func _process(_delta):
 	
 	if TimeManager.selected_duration != TimeManager.UNLIMITED:
 		timer_label.text = timer_readout(timer.time_left)
-		timer_label.modulate = Color.GREEN_YELLOW if timer.time_left > 15.0 else Color.RED
+		if timer.paused:
+			timer_label.modulate = Color.YELLOW
+		else:
+			timer_label.modulate = Color.GREEN_YELLOW if timer.time_left > 15.0 else Color.RED
 	
 	if TimeManager.selected_session_duration != TimeManager.SESSION_UNLIMITED:
 		session_timer_label.text = timer_readout(session_timer.time_left)
