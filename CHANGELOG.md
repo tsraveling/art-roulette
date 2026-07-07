@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.2.0 - 2026-07-07
+#### Features
+- new design system in place - (59546a1) - Tim Raveling
+#### Bug Fixes
+- fixed styling bug with selection - (4f80a12) - Tim Raveling
+- updated to dusty rose palette - (12a60f2) - Tim Raveling
+- color tweaking - (3b1b934) - Tim Raveling
+- improves ui scaling ui - (f591d0e) - Tim Raveling
+#### Documentation
+- README update - (a715562) - Tim Raveling
+
+- - -
+
 ## 0.1.7 - 2026-07-02
 #### Bug Fixes
 - adds help dialog - (1850da4) - Tim Raveling
