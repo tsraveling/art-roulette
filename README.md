@@ -2,6 +2,8 @@
 
 Run drawing exercises from your own personal reference libraries. Set session length, drawing length, and pick a folder (can optionally include subfolders as well) on your computer, click start, and start drawing!
 
+![Demo](docs/art-roulette-demo.gif)
+
 ## Installation
 
 To start with, download the zip for your platform from the [latest release](../../releases)!

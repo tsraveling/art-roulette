@@ -61,6 +61,7 @@ func refresh_list():
 func _setup_tree_item(item: TreeItem, folder: Folder, label: String):
 	item.set_cell_mode(0, TreeItem.CELL_MODE_CHECK)
 	item.set_editable(0, true)
+	item.set_selectable(0, false)
 	item.set_checked(0, folder.included)
 	item.set_text(0, "%s (%d images)" % [label, folder.image_count])
 	item.set_metadata(0, folder)
