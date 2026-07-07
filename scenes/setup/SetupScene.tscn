@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cssae6c3v2twh"]
 
 [ext_resource type="Script" uid="uid://bt4h5w4od8hmm" path="res://scenes/setup/SetupScene.gd" id="1_igmc0"]
-[ext_resource type="Theme" path="res://assets/theme/file_dialog_theme.tres" id="2_fdtheme"]
+[ext_resource type="Theme" uid="uid://brgq0lnl27lge" path="res://assets/theme/file_dialog_theme.tres" id="2_fdtheme"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_modes"]
 
@@ -21,7 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.980392, 0.964706, 0.941176, 1)
+color = Color(0.168627, 0.152941, 0.145098, 1)
 
 [node name="VersionLabel" type="Label" parent="." unique_id=1964743888]
 layout_mode = 1
@@ -210,8 +210,8 @@ theme_type_variation = &"PrimaryButton"
 text = "Start Roulette"
 
 [node name="RootDirectoryPicker" type="FileDialog" parent="." unique_id=210030713]
-theme = ExtResource("2_fdtheme")
 title = "Open a Directory"
+theme = ExtResource("2_fdtheme")
 ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2

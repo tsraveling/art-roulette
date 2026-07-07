@@ -19,9 +19,9 @@ var zoom_level := 1.0
 var pan_offset := Vector2.ZERO
 var last_mouse_pos := Vector2.ZERO
 
-const TIMER_COLOR_NORMAL := Color("3a3532")
-const TIMER_COLOR_PAUSED := Color("b07d2e")
-const TIMER_COLOR_WARNING := Color("c14b3a")
+const TIMER_COLOR_NORMAL := Color("ece7e1")
+const TIMER_COLOR_PAUSED := Color("d9a54e")
+const TIMER_COLOR_WARNING := Color("e0604c")
 
 const ZOOM_MIN := 1.0
 const ZOOM_MAX := 5.0
