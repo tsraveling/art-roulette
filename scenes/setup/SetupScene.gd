@@ -131,4 +131,7 @@ func _on_session_duration_button_item_selected(index):
 
 func _on_ui_scale_slider_value_changed(value: float):
 	ui_scale_label.text = "%sx" % str(value)
-	FileBrowser.set_ui_scale(value)
+
+func _on_ui_scale_slider_drag_ended(value_changed: bool):
+	if value_changed:
+		FileBrowser.set_ui_scale(ui_scale_slider.value)

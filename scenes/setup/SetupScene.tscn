@@ -113,16 +113,29 @@ text = "/documents"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="IntervalHBox" type="HBoxContainer" parent="MainLayout/SettingsPanel" unique_id=1443747404]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainLayout/SettingsPanel" unique_id=573557180]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainLayout/SettingsPanel/IntervalHBox" unique_id=165845600]
+[node name="Control" type="Control" parent="MainLayout/SettingsPanel/HBoxContainer" unique_id=15713518]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainLayout/SettingsPanel/HBoxContainer" unique_id=1792598997]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="IntervalHBox" type="HBoxContainer" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer" unique_id=1443747404]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/IntervalHBox" unique_id=165845600]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Time per sketch:"
 
-[node name="OptionButton" type="OptionButton" parent="MainLayout/SettingsPanel/IntervalHBox" unique_id=2063450302]
+[node name="OptionButton" type="OptionButton" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/IntervalHBox" unique_id=2063450302]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
@@ -149,16 +162,16 @@ popup/item_8/id = 8
 popup/item_9/text = "Unlimited"
 popup/item_9/id = 9
 
-[node name="SessionHBox" type="HBoxContainer" parent="MainLayout/SettingsPanel" unique_id=1856254413]
+[node name="SessionHBox" type="HBoxContainer" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer" unique_id=1856254413]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainLayout/SettingsPanel/SessionHBox" unique_id=592712128]
+[node name="Label" type="Label" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/SessionHBox" unique_id=592712128]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Session duration:"
 
-[node name="SessionDurationButton" type="OptionButton" parent="MainLayout/SettingsPanel/SessionHBox" unique_id=233667801]
+[node name="SessionDurationButton" type="OptionButton" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/SessionHBox" unique_id=233667801]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
@@ -177,16 +190,17 @@ popup/item_4/id = 4
 popup/item_5/text = "Untimed"
 popup/item_5/id = 5
 
-[node name="UIScaleHBox" type="HBoxContainer" parent="MainLayout/SettingsPanel" unique_id=591808735]
+[node name="UIScaleHBox" type="HBoxContainer" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer" unique_id=591808735]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MainLayout/SettingsPanel/UIScaleHBox" unique_id=2097071073]
+[node name="Label" type="Label" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/UIScaleHBox" unique_id=2097071073]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "UI scale:"
 
-[node name="UIScaleSlider" type="HSlider" parent="MainLayout/SettingsPanel/UIScaleHBox" unique_id=1635959644]
+[node name="UIScaleSlider" type="HSlider" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/UIScaleHBox" unique_id=1635959644]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = 0.75
@@ -194,14 +208,14 @@ max_value = 2.0
 step = 0.25
 value = 1.0
 
-[node name="UIScaleLabel" type="Label" parent="MainLayout/SettingsPanel/UIScaleHBox" unique_id=332119337]
+[node name="UIScaleLabel" type="Label" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/UIScaleHBox" unique_id=332119337]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "1.0x"
 horizontal_alignment = 2
 
-[node name="StartButton" type="Button" parent="MainLayout/SettingsPanel" unique_id=931336967]
+[node name="StartButton" type="Button" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer" unique_id=931336967]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Start Roulette"
@@ -215,8 +229,9 @@ access = 2
 [connection signal="pressed" from="MainLayout/VariationsPanel/StandardRadio" to="." method="_on_standard_radio_pressed"]
 [connection signal="pressed" from="MainLayout/VariationsPanel/StudyRadio" to="." method="_on_study_radio_pressed"]
 [connection signal="pressed" from="MainLayout/SettingsPanel/RootDirSelector/RootDirectoryButton" to="." method="_on_root_directory_button_pressed"]
-[connection signal="item_selected" from="MainLayout/SettingsPanel/IntervalHBox/OptionButton" to="." method="_on_option_button_item_selected"]
-[connection signal="item_selected" from="MainLayout/SettingsPanel/SessionHBox/SessionDurationButton" to="." method="_on_session_duration_button_item_selected"]
-[connection signal="value_changed" from="MainLayout/SettingsPanel/UIScaleHBox/UIScaleSlider" to="." method="_on_ui_scale_slider_value_changed"]
-[connection signal="pressed" from="MainLayout/SettingsPanel/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="item_selected" from="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/IntervalHBox/OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/SessionHBox/SessionDurationButton" to="." method="_on_session_duration_button_item_selected"]
+[connection signal="drag_ended" from="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/UIScaleHBox/UIScaleSlider" to="." method="_on_ui_scale_slider_drag_ended"]
+[connection signal="value_changed" from="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/UIScaleHBox/UIScaleSlider" to="." method="_on_ui_scale_slider_value_changed"]
+[connection signal="pressed" from="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="dir_selected" from="RootDirectoryPicker" to="." method="_on_root_directory_picker_dir_selected"]
