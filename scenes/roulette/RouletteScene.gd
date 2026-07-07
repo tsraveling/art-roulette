@@ -2,15 +2,15 @@ extends Control
 
 @onready var image_clip := $VerticalLayout/ImageClip
 @onready var image_rect := $VerticalLayout/ImageClip/ImageRect
-@onready var image_count_label := $VerticalLayout/MarginContainer/ToolBar/ImageCountLabel
-@onready var current_path_label := $VerticalLayout/MarginContainer/ToolBar/CurrentPathLabel
-@onready var next_button := $VerticalLayout/MarginContainer/ToolBar/NextButton
-@onready var timer_label := $VerticalLayout/MarginContainer/ToolBar/TimerLabel
+@onready var image_count_label := $VerticalLayout/ToolbarPanel/MarginContainer/ToolBar/ImageCountLabel
+@onready var current_path_label := $VerticalLayout/ToolbarPanel/MarginContainer/ToolBar/CurrentPathLabel
+@onready var next_button := $VerticalLayout/ToolbarPanel/MarginContainer/ToolBar/NextButton
+@onready var timer_label := $VerticalLayout/ToolbarPanel/MarginContainer/ToolBar/TimerLabel
 @onready var timer := $Timer
 @onready var more_time_menu := $MoreTimeMenu
-@onready var add_time_button := $VerticalLayout/MarginContainer/ToolBar/AddTimeButton
-@onready var pause_play_button := $VerticalLayout/MarginContainer/ToolBar/PausePlayButton
-@onready var session_timer_label := $VerticalLayout/MarginContainer/ToolBar/SessionTimerLabel
+@onready var add_time_button := $VerticalLayout/ToolbarPanel/MarginContainer/ToolBar/AddTimeButton
+@onready var pause_play_button := $VerticalLayout/ToolbarPanel/MarginContainer/ToolBar/PausePlayButton
+@onready var session_timer_label := $VerticalLayout/ToolbarPanel/MarginContainer/ToolBar/SessionTimerLabel
 @onready var session_timer := $SessionTimer
 @onready var session_dialog := $ConfirmationDialog
 @onready var help_dialog := $HelpDialog
@@ -18,6 +18,10 @@ extends Control
 var zoom_level := 1.0
 var pan_offset := Vector2.ZERO
 var last_mouse_pos := Vector2.ZERO
+
+const TIMER_COLOR_NORMAL := Color("3a3532")
+const TIMER_COLOR_PAUSED := Color("b07d2e")
+const TIMER_COLOR_WARNING := Color("c14b3a")
 
 const ZOOM_MIN := 1.0
 const ZOOM_MAX := 5.0
@@ -127,13 +131,13 @@ func _process(_delta):
 	if TimeManager.selected_duration != TimeManager.UNLIMITED:
 		timer_label.text = timer_readout(timer.time_left)
 		if timer.paused:
-			timer_label.modulate = Color.YELLOW
+			timer_label.add_theme_color_override("font_color", TIMER_COLOR_PAUSED)
 		else:
-			timer_label.modulate = Color.GREEN_YELLOW if timer.time_left > 15.0 else Color.RED
-	
+			timer_label.add_theme_color_override("font_color", TIMER_COLOR_NORMAL if timer.time_left > 15.0 else TIMER_COLOR_WARNING)
+
 	if TimeManager.selected_session_duration != TimeManager.SESSION_UNLIMITED:
 		session_timer_label.text = timer_readout(session_timer.time_left)
-		session_timer_label.modulate = Color.GREEN_YELLOW if session_timer.time_left > 60.0 else Color.RED
+		session_timer_label.add_theme_color_override("font_color", TIMER_COLOR_NORMAL if session_timer.time_left > 60.0 else TIMER_COLOR_WARNING)
 
 func _on_done_button_pressed():
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)

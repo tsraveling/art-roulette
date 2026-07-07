@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cssae6c3v2twh"]
 
 [ext_resource type="Script" uid="uid://bt4h5w4od8hmm" path="res://scenes/setup/SetupScene.gd" id="1_igmc0"]
+[ext_resource type="Theme" path="res://assets/theme/file_dialog_theme.tres" id="2_fdtheme"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_modes"]
 
@@ -20,7 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.109804, 0.109804, 0.109804, 1)
+color = Color(0.980392, 0.964706, 0.941176, 1)
 
 [node name="VersionLabel" type="Label" parent="." unique_id=1964743888]
 layout_mode = 1
@@ -35,8 +36,7 @@ offset_right = -16.0
 offset_bottom = -12.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
-theme_override_font_sizes/font_size = 12
+theme_type_variation = &"SmallLabel"
 text = "v0.1.0"
 horizontal_alignment = 2
 
@@ -56,29 +56,20 @@ theme_override_constants/separation = 40
 [node name="VariationsPanel" type="VBoxContainer" parent="MainLayout" unique_id=1258111224]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
-theme_override_constants/separation = 8
 
 [node name="Header" type="Label" parent="MainLayout/VariationsPanel" unique_id=60425876]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_type_variation = &"HeaderLabel"
 text = "Variations"
 
 [node name="StandardRadio" type="CheckBox" parent="MainLayout/VariationsPanel" unique_id=1790696133]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.55, 0.55, 0.55, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(0.7, 0.7, 0.7, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 button_pressed = true
 button_group = SubResource("ButtonGroup_modes")
 text = "Standard"
 
 [node name="StudyRadio" type="CheckBox" parent="MainLayout/VariationsPanel" unique_id=1859776503]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.55, 0.55, 0.55, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(0.7, 0.7, 0.7, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 button_group = SubResource("ButtonGroup_modes")
 text = "Study"
 
@@ -87,6 +78,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="DescriptionLabel" type="Label" parent="MainLayout/VariationsPanel" unique_id=32628359]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 text = "Draw photos at random from all selected folders and display one at a time."
@@ -98,7 +90,6 @@ size_flags_horizontal = 3
 
 [node name="RootDirSelector" type="HBoxContainer" parent="MainLayout/SettingsPanel" unique_id=290006326]
 layout_mode = 2
-theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="MainLayout/SettingsPanel/RootDirSelector" unique_id=1637436822]
 layout_mode = 2
@@ -132,13 +123,12 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/IntervalHBox" unique_id=165845600]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
 text = "Time per sketch:"
 
-[node name="OptionButton" type="OptionButton" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/IntervalHBox" unique_id=2063450302]
+[node name="DurationSelect" type="OptionButton" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/IntervalHBox" unique_id=2063450302]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
 selected = 2
 item_count = 10
 popup/item_0/text = "30s"
@@ -168,13 +158,12 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/SessionHBox" unique_id=592712128]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
 text = "Session duration:"
 
-[node name="SessionDurationButton" type="OptionButton" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/SessionHBox" unique_id=233667801]
+[node name="SessionDurationSelect" type="OptionButton" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/SessionHBox" unique_id=233667801]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
 selected = 2
 item_count = 6
 popup/item_0/text = "10m"
@@ -196,10 +185,10 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/UIScaleHBox" unique_id=2097071073]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
 text = "UI scale:"
 
 [node name="UIScaleSlider" type="HSlider" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/UIScaleHBox" unique_id=1635959644]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -209,18 +198,19 @@ step = 0.25
 value = 1.0
 
 [node name="UIScaleLabel" type="Label" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/UIScaleHBox" unique_id=332119337]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
 text = "1.0x"
 horizontal_alignment = 2
 
 [node name="StartButton" type="Button" parent="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer" unique_id=931336967]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_type_variation = &"PrimaryButton"
 text = "Start Roulette"
 
 [node name="RootDirectoryPicker" type="FileDialog" parent="." unique_id=210030713]
+theme = ExtResource("2_fdtheme")
 title = "Open a Directory"
 ok_button_text = "Select Current Folder"
 file_mode = 2
@@ -229,8 +219,8 @@ access = 2
 [connection signal="pressed" from="MainLayout/VariationsPanel/StandardRadio" to="." method="_on_standard_radio_pressed"]
 [connection signal="pressed" from="MainLayout/VariationsPanel/StudyRadio" to="." method="_on_study_radio_pressed"]
 [connection signal="pressed" from="MainLayout/SettingsPanel/RootDirSelector/RootDirectoryButton" to="." method="_on_root_directory_button_pressed"]
-[connection signal="item_selected" from="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/IntervalHBox/OptionButton" to="." method="_on_option_button_item_selected"]
-[connection signal="item_selected" from="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/SessionHBox/SessionDurationButton" to="." method="_on_session_duration_button_item_selected"]
+[connection signal="item_selected" from="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/IntervalHBox/DurationSelect" to="." method="_on_option_button_item_selected"]
+[connection signal="item_selected" from="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/SessionHBox/SessionDurationSelect" to="." method="_on_session_duration_button_item_selected"]
 [connection signal="drag_ended" from="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/UIScaleHBox/UIScaleSlider" to="." method="_on_ui_scale_slider_drag_ended"]
 [connection signal="value_changed" from="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/UIScaleHBox/UIScaleSlider" to="." method="_on_ui_scale_slider_value_changed"]
 [connection signal="pressed" from="MainLayout/SettingsPanel/HBoxContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

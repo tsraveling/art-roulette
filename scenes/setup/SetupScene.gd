@@ -2,12 +2,12 @@ extends Control
 
 @onready var root_dir_picker := $RootDirectoryPicker
 @onready var root_dir_button := $MainLayout/SettingsPanel/RootDirSelector/RootDirectoryButton
-@onready var duration_select := $MainLayout/SettingsPanel/IntervalHBox/OptionButton
-@onready var session_select := $MainLayout/SettingsPanel/SessionHBox/SessionDurationButton
+@onready var duration_select := %DurationSelect
+@onready var session_select := %SessionDurationSelect
 @onready var folder_tree := $MainLayout/SettingsPanel/FolderTree
-@onready var ui_scale_slider := $MainLayout/SettingsPanel/UIScaleHBox/UIScaleSlider
-@onready var ui_scale_label := $MainLayout/SettingsPanel/UIScaleHBox/UIScaleLabel
-@onready var description_label := $MainLayout/VariationsPanel/DescriptionLabel
+@onready var ui_scale_slider := %UIScaleSlider
+@onready var ui_scale_label := %UIScaleLabel
+@onready var description_label := %DescriptionLabel
 @onready var version_label := $VersionLabel
 
 const MODE_DESCRIPTIONS := {

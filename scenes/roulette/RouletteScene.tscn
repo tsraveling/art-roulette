@@ -19,58 +19,61 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VerticalLayout" unique_id=623296222]
+[node name="ToolbarPanel" type="PanelContainer" parent="VerticalLayout" unique_id=1554002391]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VerticalLayout/ToolbarPanel" unique_id=623296222]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_bottom = 8
 
-[node name="ToolBar" type="HBoxContainer" parent="VerticalLayout/MarginContainer" unique_id=382003743]
+[node name="ToolBar" type="HBoxContainer" parent="VerticalLayout/ToolbarPanel/MarginContainer" unique_id=382003743]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 alignment = 2
 
-[node name="CurrentPathLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=1096560449]
+[node name="CurrentPathLabel" type="Label" parent="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar" unique_id=1096560449]
 layout_mode = 2
 size_flags_horizontal = 3
 text_overrun_behavior = 2
 
-[node name="ImageCountLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=1389091387]
+[node name="ImageCountLabel" type="Label" parent="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar" unique_id=1389091387]
 layout_mode = 2
 
-[node name="FocusButton" type="CheckButton" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=410906025]
+[node name="FocusButton" type="CheckButton" parent="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar" unique_id=410906025]
 layout_mode = 2
 focus_mode = 0
 text = "Focus"
 
-[node name="TimerLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=1066857798]
+[node name="TimerLabel" type="Label" parent="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar" unique_id=1066857798]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_type_variation = &"TimerLabel"
 text = "~"
 
-[node name="NextButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=1491614102]
+[node name="NextButton" type="Button" parent="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar" unique_id=1491614102]
 layout_mode = 2
 text = "Next Image"
 
-[node name="AddTimeButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=1648369871]
+[node name="AddTimeButton" type="Button" parent="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar" unique_id=1648369871]
 layout_mode = 2
 text = "Add Time"
 
-[node name="PausePlayButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=553824922]
+[node name="PausePlayButton" type="Button" parent="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar" unique_id=553824922]
 layout_mode = 2
 text = "Pause"
 
-[node name="DoneButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=794869871]
+[node name="DoneButton" type="Button" parent="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar" unique_id=794869871]
 layout_mode = 2
 text = "Done	"
 
-[node name="SessionTimerLabel" type="Label" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=1692277510]
+[node name="SessionTimerLabel" type="Label" parent="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar" unique_id=1692277510]
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_type_variation = &"TimerLabel"
 text = "~"
 
-[node name="HelpButton" type="Button" parent="VerticalLayout/MarginContainer/ToolBar" unique_id=1096560448]
+[node name="HelpButton" type="Button" parent="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar" unique_id=1096560448]
 layout_mode = 2
 focus_mode = 0
 text = " ? "
@@ -79,6 +82,15 @@ text = " ? "
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Backdrop" type="ColorRect" parent="VerticalLayout/ImageClip" unique_id=1554002392]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="ImageRect" type="TextureRect" parent="VerticalLayout/ImageClip" unique_id=328963044]
 layout_mode = 1
@@ -182,11 +194,11 @@ text = "Pan (when zoomed)"
 layout_mode = 2
 text = "Zoom"
 
-[connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/HelpButton" to="." method="_on_help_button_pressed"]
-[connection signal="toggled" from="VerticalLayout/MarginContainer/ToolBar/FocusButton" to="." method="_on_focus_button_toggled"]
-[connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/NextButton" to="." method="_on_next_button_pressed"]
-[connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/AddTimeButton" to="." method="_on_add_time_button_pressed"]
-[connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/PausePlayButton" to="." method="_on_pause_play_button_pressed"]
-[connection signal="pressed" from="VerticalLayout/MarginContainer/ToolBar/DoneButton" to="." method="_on_done_button_pressed"]
+[connection signal="pressed" from="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar/HelpButton" to="." method="_on_help_button_pressed"]
+[connection signal="toggled" from="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar/FocusButton" to="." method="_on_focus_button_toggled"]
+[connection signal="pressed" from="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar/AddTimeButton" to="." method="_on_add_time_button_pressed"]
+[connection signal="pressed" from="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar/PausePlayButton" to="." method="_on_pause_play_button_pressed"]
+[connection signal="pressed" from="VerticalLayout/ToolbarPanel/MarginContainer/ToolBar/DoneButton" to="." method="_on_done_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="index_pressed" from="MoreTimeMenu" to="." method="_on_more_time_menu_index_pressed"]
